@@ -17,6 +17,9 @@
     "type": "git",
     "url": "git://github.com/adhbh/confiq.git"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
   "devDependencies": {
     "babel-cli": "~6.11.0",
     "babel-plugin-syntax-async-functions": "~6.13.0",
