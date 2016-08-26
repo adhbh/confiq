@@ -1,8 +1,21 @@
 import merge from 'deepmerge'
-import appRootDir from 'app-root-dir'
+import path from 'path'
+import fs from 'fs'
 
-global.rootRequire = function (name = 'development', path) {
-	return require(appRootDir.get() + path + name);
+const parentModFilename = module.parent.filename
+const parentDir = path.dirname(parentModFilename)
+
+function findRoot (dir) {
+	if(fs.existsSync(dir + '/package.json')) {
+		return dir
+	} else {
+		let parent = path.resolve(dir + '/..')
+		return findRoot(parent)
+	}
+}
+
+global.rootRequire = function (name = 'development', folder) {
+	return require(findRoot(parentDir) + folder + name);
 }
 
 export default function (key, { path = '/config/', defaultName = 'default' } = {}) {
