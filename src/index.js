@@ -4,6 +4,7 @@ import fs from 'fs'
 
 const parentModFilename = module.parent.filename
 const parentDir = path.dirname(parentModFilename)
+delete require.cache[__filename];
 
 function findRoot (dir) {
 	if(fs.existsSync(dir + '/package.json')) {
